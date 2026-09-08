@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Rastreadores de IA: contenido abierto, citando la fuente
+User-agent: GPTBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://bienestarsinfiltros.com/sitemap.xml

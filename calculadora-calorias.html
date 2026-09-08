@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de calorías: TMB y TDEE (Mifflin-St Jeor)</title>
+<meta name="google-adsense-account" content="ca-pub-7791855943526179">
+<script>
+(function () {
+  var c = null;
+  try { c = JSON.parse(localStorage.getItem('bsf_consent')); } catch (e) {}
+  if (c && c.analytics) {
+    var gtagScript = document.createElement('script');
+    gtagScript.async = true;
+    gtagScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-X9CGN2FDG1';
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-X9CGN2FDG1');
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-KK28NN2N');
+  }
+  if (c && c.ads) {
+    var adsScript = document.createElement('script');
+    adsScript.async = true;
+    adsScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7791855943526179';
+    adsScript.crossOrigin = 'anonymous';
+    document.head.appendChild(adsScript);
+  }
+})();
+</script>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="description" content="Calculá tu tasa metabólica basal y tu gasto calórico diario con la fórmula de Mifflin-St Jeor. Herramienta orientativa, con contexto sobre sus límites.">
+<link rel="canonical" href="https://bienestarsinfiltros.com/calculadora-calorias">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bienestar Sin Filtros">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Calculadora de calorías: TMB y gasto calórico diario">
+<meta property="og:description" content="Calculá tu tasa metabólica basal y tu gasto calórico diario con la fórmula de Mifflin-St Jeor. Herramienta orientativa, con contexto sobre sus límites.">
+<meta property="og:url" content="https://bienestarsinfiltros.com/calculadora-calorias">
+<meta property="og:image" content="https://bienestarsinfiltros.com/fotos/65143b0cb027.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Calculadora de calorías: TMB y gasto calórico diario">
+<meta name="twitter:description" content="Calculá tu tasa metabólica basal y tu gasto calórico diario con la fórmula de Mifflin-St Jeor. Herramienta orientativa, con contexto sobre sus límites.">
+<meta name="twitter:image" content="https://bienestarsinfiltros.com/fotos/65143b0cb027.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilo.css">
+
+</head>
+<body class="lectura">
+
+<a class="skip" href="#contenido">Saltar al contenido</a>
+<div id="progreso" aria-hidden="true"></div>
+<canvas id="trace" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header>
+  <div class="bar">
+    <a class="wordmark" href="/"><span class="pulse" aria-hidden="true"></span>Bienestar Sin Filtros</a>
+    <nav class="main">
+      <a href="articulos">Art&iacute;culos</a>
+      <a href="comparativas">Comparativas</a>
+      <a href="calculadora-calorias">Calculadora</a>
+      <a href="/#metodo">M&eacute;todo</a>
+      <a href="sobre-nosotros">Sobre nosotros</a>
+    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu-movil" aria-label="Abrir men&uacute;">
+      <svg class="abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"/><path d="M4 12h16"/><path d="M4 17h16"/></svg>
+      <svg class="cerrar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12"/><path d="M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <nav id="menu-movil">
+    <a href="articulos">Art&iacute;culos</a>
+    <a href="comparativas">Comparativas</a>
+    <a href="calculadora-calorias">Calculadora</a>
+    <a href="/#metodo">M&eacute;todo</a>
+    <a href="sobre-nosotros">Sobre nosotros</a>
+  </nav>
+</header>
+
+<div class="wrap">
+  <div class="articulo">
+    <article id="contenido">
+      <div class="art-cabecera">
+        <p class="art-ruta"><a href="/">Inicio</a><span>/</span><a href="articulos">Art&iacute;culos</a><span>/</span>Herramientas · Nutrición</p>
+        <h1>Calculadora de calorías: TMB y gasto calórico diario</h1>
+        <p class="art-datos"> 6 min de lectura <span class="sep">·</span> Actualizado 4 de septiembre de 2026 </p>
+      </div>
+      <div class="art-foto"><img src="fotos/65143b0cb027.jpg" alt="Despertador de mesa clásico con dos campanas, sobre fondo blanco" width="2000" height="1333" decoding="async" fetchpriority="high"></div>
+      <div class="art-cuerpo">
+<p>Esta herramienta calcula dos números que suelen aparecer mezclados en redes sociales bajo términos como "mis calorías de mantenimiento" o "cuánto debo comer": la tasa metabólica basal (TMB) y el gasto calórico diario total (TDEE, por sus siglas en inglés). Ambos son estimaciones, no mediciones exactas, pero sirven como punto de partida razonable antes de ajustar cualquier plan de alimentación.</p>
+
+  <h2 id="que-calcula-esta-herramienta">Qué calcula esta herramienta</h2>
+  <p>La TMB es la energía que tu cuerpo consume en reposo absoluto para mantener funciones básicas como respirar, la circulación y la actividad celular. El TDEE toma esa TMB y la multiplica por un factor según tu nivel de actividad física, para estimar cuántas calorías gastás en un día completo, incluyendo el ejercicio y el movimiento cotidiano.</p>
+
+  <div class="calc-box">
+    <h2 id="calcula-tu-tmb-y-tu-gasto-calorico-diario">Calculá tu TMB y tu gasto calórico diario</h2>
+    <form id="calc-form" novalidate>
+      <div class="calc-grid">
+        <div class="field">
+          <label for="peso">Peso (kg)</label>
+          <input type="number" id="peso" name="peso" min="20" max="300" step="0.1" placeholder="Ej: 70" required>
+        </div>
+        <div class="field">
+          <label for="altura">Altura (cm)</label>
+          <input type="number" id="altura" name="altura" min="100" max="250" step="0.1" placeholder="Ej: 170" required>
+        </div>
+        <div class="field">
+          <label for="edad">Edad (años)</label>
+          <input type="number" id="edad" name="edad" min="10" max="120" step="1" placeholder="Ej: 30" required>
+        </div>
+        <div class="field">
+          <label for="actividad">Nivel de actividad</label>
+          <select id="actividad" name="actividad" required>
+            <option value="1.2">Sedentario (poco o nada de ejercicio)</option>
+            <option value="1.375">Ligero (ejercicio 1-3 días/semana)</option>
+            <option value="1.55" selected>Moderado (ejercicio 3-5 días/semana)</option>
+            <option value="1.725">Activo (ejercicio 6-7 días/semana)</option>
+            <option value="1.9">Muy activo (ejercicio intenso a diario o trabajo físico)</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label>Sexo</label>
+          <div class="radio-group">
+            <label><input type="radio" name="sexo" value="hombre" checked> Hombre</label>
+            <label><input type="radio" name="sexo" value="mujer"> Mujer</label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="calc-submit">Calcular</button>
+      <div id="calc-error" class="calc-error" style="display:none;" role="alert"></div>
+      <div id="calc-result" class="calc-result" style="display:none;">
+        <div class="result-cards">
+          <div class="result-card">
+            <div class="label">TMB</div>
+            <div class="value" id="valor-tmb">—</div>
+            <div class="unit">calorías en reposo/día</div>
+          </div>
+          <div class="result-card">
+            <div class="label">Gasto diario (TDEE)</div>
+            <div class="value" id="valor-tdee">—</div>
+            <div class="unit">calorías/día</div>
+          </div>
+        </div>
+        <p class="result-note">Estimación orientativa (fórmula de Mifflin-St Jeor). No sustituye una valoración nutricional profesional.</p>
+      </div>
+    </form>
+  </div>
+
+  <h2 id="de-donde-sale-el-calculo">De dónde sale el cálculo</h2>
+  <p>El resultado se basa en la ecuación de Mifflin-St Jeor, publicada en 1990 y validada en estudios posteriores como una de las fórmulas más precisas disponibles para estimar la TMB en población general, por eso reemplazó en gran medida a la antigua fórmula de Harris-Benedict. No es un cálculo inventado ni una aproximación de marketing: es la que suelen usar nutricionistas y calculadoras clínicas como punto de partida.</p>
+  <p>La fórmula usada es la siguiente. Para hombres: TMB = 10 × peso (kg) + 6.25 × altura (cm) − 5 × edad + 5. Para mujeres: TMB = 10 × peso (kg) + 6.25 × altura (cm) − 5 × edad − 161. Ese valor se multiplica luego por un factor de actividad (entre 1.2 y 1.9) para obtener el TDEE.</p>
+
+  <h2 id="limitaciones-a-tener-en-cuenta">Limitaciones a tener en cuenta</h2>
+  <p>Como cualquier fórmula basada en peso, altura, edad y sexo, esta calculadora no distingue composición corporal: dos personas con el mismo peso pero distinta proporción de masa muscular y grasa pueden tener una TMB real algo diferente a la estimada. Tampoco considera condiciones médicas que alteran el metabolismo (problemas de tiroides, ciertos medicamentos, embarazo), ni factores genéticos individuales. El resultado es un punto de partida razonable, no una cifra clínica exacta, y cualquier objetivo de pérdida o ganancia de peso conviene ajustarlo con seguimiento real y, frente a condiciones de salud, con acompañamiento profesional.</p>
+
+  <dl class="faq">
+    <h2 id="preguntas-frecuentes">Preguntas frecuentes</h2>
+    <dt>¿La TMB es lo mismo que las calorías que debo comer?</dt>
+    <dd>No. La TMB es lo que tu cuerpo gasta en reposo total. El TDEE, que ya incluye tu actividad diaria, es la referencia más útil para pensar en mantenimiento, déficit o superávit calórico.</dd>
+    <dt>¿Por qué la fórmula da resultados distintos entre hombres y mujeres con los mismos datos?</dt>
+    <dd>Porque, en promedio, los hombres tienen mayor proporción de masa muscular respecto a la grasa corporal a igual peso, lo que eleva el gasto energético en reposo. La fórmula lo refleja con una constante distinta para cada sexo.</dd>
+    <dt>¿Puedo usar este número para bajar de peso rápido?</dt>
+    <dd>El TDEE sirve como referencia de mantenimiento. Un déficit moderado y sostenido suele ser más seguro y sostenible que un déficit agresivo, y ante cualquier duda sobre cuánto reducir conviene consultar a un profesional de nutrición.</dd>
+  </dl>
+
+  <div class="disclaimer"><strong>Fuente:</strong> Mifflin MD, St Jeor ST, et al. "A new predictive equation for resting energy expenditure in healthy individuals" (American Journal of Clinical Nutrition, 1990). Esta calculadora tiene fines informativos y orientativos, no constituye consejo médico ni nutricional personalizado. Ante objetivos de salud específicos, consultá a un profesional cualificado.</div>
+      </div>
+      
+      
+      
+    </article>
+    
+  </div>
+</div>
+
+<button id="arriba" type="button" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
+</button>
+
+<footer class="site">
+  <div class="wrap">
+    <span>Bienestar Sin Filtros &mdash; contenido informativo, no consejo m&eacute;dico. Por Miguel Lopez.</span>
+    <nav>
+      <a href="sobre-nosotros">Sobre nosotros</a>
+      <a href="contacto">Contacto</a>
+      <a href="aviso-legal">Aviso legal</a>
+      <a href="politica-privacidad">Privacidad</a>
+      <button class="cookie-prefs-link">Preferencias de cookies</button>
+    </nav>
+  </div>
+</footer>
+
+<div id="cookie-banner" hidden>
+  <p>Usamos cookies t&eacute;cnicas siempre, y anal&iacute;ticas/publicitarias solo si las aceptas. Pod&eacute;s cambiar de opini&oacute;n cuando quieras desde "Preferencias de cookies" al pie de la p&aacute;gina. M&aacute;s info en la <a href="politica-privacidad">pol&iacute;tica de privacidad</a>.</p>
+  <div class="cb-actions">
+    <button class="cb-accept" data-consent="all">Aceptar todo</button>
+    <button data-consent="reject">Rechazar</button>
+    <button data-consent="custom">Personalizar</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="sitio.js" defer></script>
+
+</body>
+</html>
